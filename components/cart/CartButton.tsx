@@ -18,7 +18,7 @@ export function CartButton({ className }: { className?: string }) {
       onClick={open}
       aria-label={`Abrir carrinho, ${count} ${count === 1 ? "item" : "itens"}`}
       className={cn(
-        "relative grid h-11 w-11 cursor-pointer place-items-center rounded-xl border border-edge bg-surface/60 text-ink backdrop-blur transition-colors duration-200 hover:border-accent-primary hover:text-accent-primary",
+        "relative grid h-11 w-11 cursor-pointer place-items-center rounded-xl border border-white/20 bg-white/10 text-white transition-colors duration-200 hover:border-white hover:bg-white/15",
         className,
       )}
     >
@@ -31,7 +31,7 @@ export function CartButton({ className }: { className?: string }) {
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0, opacity: 0 }}
             transition={{ type: "spring", stiffness: 520, damping: 24 }}
-            className="absolute -right-1.5 -top-1.5 grid h-5 min-w-[20px] place-items-center rounded-full bg-accent-secondary px-1 font-mono text-[10px] font-bold leading-none text-ink"
+            className="absolute -right-1.5 -top-1.5 grid h-5 min-w-[20px] place-items-center rounded-full bg-white px-1 font-mono text-[10px] font-bold leading-none text-accent-primary"
           >
             {count}
           </motion.span>

@@ -46,29 +46,38 @@ export function KitBuilder() {
   return (
     <Section
       id="kits"
+      className="pb-28 sm:pb-24"
       eyebrow="Monte do seu jeito"
-      title={<>Kit <span className="text-accent-primary">personalizado</span></>}
+      title={
+        <>
+          Kit
+          <br className="sm:hidden" />{" "}
+          <span className="text-accent-primary">personalizado</span>
+        </>
+      }
       description="Escolha o tamanho, recheie com seus sabores e fecha pelo WhatsApp."
     >
       <div className="grid gap-6 lg:grid-cols-[1fr_1.05fr]">
-        <div>
-          <div className="grid grid-cols-3 gap-3">
+        <div className="min-w-0">
+          <div className="grid grid-cols-3 gap-2 sm:gap-3">
             {kitTiers.map((t) => (
               <button
                 key={t.size}
                 type="button"
                 onClick={() => setSize(t)}
                 className={cn(
-                  "cursor-pointer rounded-2xl border p-4 text-left transition-colors duration-200",
+                  "cursor-pointer rounded-xl border p-2.5 text-center transition-colors duration-200 sm:rounded-2xl sm:p-4 sm:text-left",
                   t.size === tier.size
-                    ? "border-accent-primary bg-surface-elevated"
-                    : "border-edge bg-surface hover:border-ink-muted",
+                    ? "border-accent-primary bg-accent-primary/10"
+                    : "border-edge bg-surface hover:border-accent-orange/50",
                 )}
               >
-                <span className="font-display text-3xl font-extrabold leading-none text-ink">{t.size}</span>
-                <span className="mt-1.5 block font-mono text-[10px] uppercase tracking-[0.15em] text-accent-primary">{t.label}</span>
+                <span className="font-display text-2xl font-extrabold leading-none text-ink sm:text-3xl">{t.size}</span>
+                <span className="mt-1 block font-mono text-[8px] uppercase leading-tight tracking-[0.08em] text-accent-primary sm:mt-1.5 sm:text-[10px] sm:tracking-[0.15em]">
+                  {t.label}
+                </span>
                 {t.discount > 0 && (
-                  <span className="mt-2 inline-block rounded-full bg-accent-secondary px-2 py-0.5 font-mono text-[10px] font-bold text-ink">
+                  <span className="mt-2 inline-block rounded-full bg-accent-primary px-2 py-0.5 font-mono text-[10px] font-bold text-white">
                     -{Math.round(t.discount * 100)}%
                   </span>
                 )}

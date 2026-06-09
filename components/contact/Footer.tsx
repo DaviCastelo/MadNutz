@@ -18,8 +18,14 @@ const socials = [
 
 export function Footer() {
   return (
-    <footer className="relative border-t border-edge px-5 pb-10 pt-16 sm:px-8">
-      <div className="mx-auto max-w-shell">
+    <footer className="relative border-t border-accent-primary/30">
+      <div className="bg-accent-primary py-3 text-center">
+        <p className="font-mono text-[11px] font-bold uppercase tracking-[0.28em] text-white">
+          99% nuts · <span className="text-accent-orange">1% malícia</span>
+        </p>
+      </div>
+      <div className="px-5 pb-10 pt-16 sm:px-8">
+        <div className="mx-auto max-w-shell">
         <div className="flex flex-col gap-10 md:flex-row md:items-end md:justify-between">
           <div>
             <LogoWordmark className="text-5xl sm:text-6xl" />
@@ -52,12 +58,13 @@ export function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={label}
-                className="grid h-11 w-11 place-items-center rounded-xl border border-edge text-ink-muted transition-colors hover:border-accent-primary hover:text-accent-primary"
+                className="grid h-11 w-11 place-items-center rounded-xl border border-edge text-ink-muted transition-colors hover:border-accent-primary hover:bg-accent-primary/10 hover:text-accent-primary"
               >
                 <Icon className="h-5 w-5" />
               </a>
             ))}
           </div>
+        </div>
         </div>
       </div>
     </footer>

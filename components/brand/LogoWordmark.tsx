@@ -4,8 +4,11 @@ import { cn } from "@/lib/utils";
  *  fallback for logo.glb (navbar, hero, loading) and the footer mark. */
 export function LogoWordmark({
   className,
+  variant = "default",
 }: {
   className?: string;
+  /** Header lockup: MAD branco + NUTZ laranja sobre fundo vermelho. */
+  variant?: "default" | "header";
 }) {
   return (
     <span
@@ -14,8 +17,10 @@ export function LogoWordmark({
         className,
       )}
     >
-      <span className="text-ink">MAD</span>
-      <span className="text-accent-primary">NUTZ</span>
+      <span className={variant === "header" ? "text-white" : "text-ink"}>MAD</span>
+      <span className={variant === "header" ? "text-accent-orange" : "text-accent-primary"}>
+        NUTZ
+      </span>
     </span>
   );
 }

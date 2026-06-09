@@ -7,7 +7,7 @@ import { WhatsAppIcon } from "@/components/brand/icons";
 import { cn, waLink } from "@/lib/utils";
 
 const fieldClass =
-  "w-full rounded-xl border border-edge bg-surface px-4 py-3 text-ink placeholder:text-ink-muted/70 transition-colors focus:border-accent-primary focus:outline-none";
+  "w-full rounded-xl border border-edge bg-surface px-4 py-3 text-ink placeholder:text-ink-muted/70 transition-colors focus:border-accent-orange focus:outline-none";
 const labelClass =
   "mb-2 block font-mono text-xs font-bold uppercase tracking-[0.15em] text-ink-muted";
 
@@ -27,7 +27,7 @@ export function Contact() {
     <Section
       id="contato"
       eyebrow="Fala com a gente"
-      title={<>Bora <span className="text-accent-primary">conversar?</span></>}
+      title={<>Bora <span className="text-accent-secondary">conversar?</span></>}
       description="Manda sua mensagem — ela abre direto no nosso WhatsApp, já formatadinha."
     >
       <form onSubmit={onSubmit} className="mx-auto max-w-xl space-y-5">

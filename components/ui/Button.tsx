@@ -8,11 +8,11 @@ export const buttonVariants = cva(
     variants: {
       variant: {
         primary:
-          "bg-accent-primary text-background hover:shadow-glow-strong hover:-translate-y-0.5 active:translate-y-0",
+          "bg-accent-primary text-white shadow-brand hover:bg-[#a01f25] hover:shadow-glow-strong hover:-translate-y-0.5 active:translate-y-0",
         ember:
-          "bg-accent-secondary text-ink hover:shadow-ember hover:-translate-y-0.5 active:translate-y-0",
+          "bg-accent-orange text-black shadow-brand hover:bg-[#d67415] hover:shadow-ember hover:-translate-y-0.5 active:translate-y-0",
         outline:
-          "border border-edge text-ink hover:border-accent-primary hover:text-accent-primary",
+          "border border-edge text-ink hover:border-accent-orange hover:text-accent-orange",
         ghost: "text-ink hover:text-accent-primary",
         whatsapp:
           "bg-[#1FAE54] text-white hover:bg-[#1b9a49] hover:-translate-y-0.5 active:translate-y-0",

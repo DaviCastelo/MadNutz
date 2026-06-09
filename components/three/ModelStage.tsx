@@ -18,7 +18,7 @@ type ModelStageProps = {
 };
 
 /** A self-contained Canvas presenting a single GLB with three-point lighting.
- *  Used by the navbar logo, the About mascote, and the 404 page. */
+ *  Used by the navbar logo. */
 export default function ModelStage({
   url,
   targetSize = 3,
@@ -39,7 +39,7 @@ export default function ModelStage({
       <Suspense fallback={null}>
         <ambientLight intensity={0.75} />
         <directionalLight position={[4, 6, 5]} intensity={2.2} color="#FFF1DC" />
-        <pointLight position={[-4, -3, 2]} intensity={24} color="#E8451A" />
+        <pointLight position={[-4, -3, 2]} intensity={24} color="#C82830" />
         <NormalizedModel
           url={url}
           targetSize={targetSize}
@@ -54,4 +54,3 @@ export default function ModelStage({
 }
 
 useGLTF.preload("/assets/logo.glb", DRACO_PATH);
-useGLTF.preload("/assets/mascote.glb", DRACO_PATH);

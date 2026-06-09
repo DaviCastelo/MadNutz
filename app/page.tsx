@@ -18,7 +18,7 @@ export default function Home() {
       <LoadingScreen />
       <CursorGlow />
       <Navbar />
-      <main>
+      <main className="w-full overflow-x-clip">
         <Hero />
         <Products />
         <KitBuilder />

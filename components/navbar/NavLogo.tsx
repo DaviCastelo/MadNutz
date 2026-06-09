@@ -31,7 +31,7 @@ export function NavLogo() {
           />
         </span>
       )}
-      <LogoWordmark className="text-xl tracking-tight" />
+      <LogoWordmark variant="header" className="text-xl tracking-tight" />
     </a>
   );
 }

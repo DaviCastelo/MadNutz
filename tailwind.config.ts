@@ -5,21 +5,22 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        background: "#0A0A0A",
+        background: "#000000",
         surface: {
-          DEFAULT: "#111111",
+          DEFAULT: "#131313",
           elevated: "#1A1A1A",
         },
         accent: {
-          DEFAULT: "#F5A623",
-          primary: "#F5A623",
-          secondary: "#E8451A",
+          DEFAULT: "#C82830",
+          primary: "#C82830",
+          secondary: "#EF841A",
+          orange: "#EF841A",
         },
         ink: {
-          DEFAULT: "#F5F5F0",
-          muted: "#888888",
+          DEFAULT: "#FFFFFF",
+          muted: "#999999",
         },
-        edge: "#2A2A2A",
+        edge: "#333333",
       },
       fontFamily: {
         display: ["var(--font-display)", "system-ui", "sans-serif"],
@@ -33,9 +34,10 @@ const config: Config = {
         shell: "1440px",
       },
       boxShadow: {
-        glow: "0 0 60px -12px rgba(245, 166, 35, 0.45)",
-        "glow-strong": "0 0 90px -10px rgba(245, 166, 35, 0.6)",
-        ember: "0 0 60px -12px rgba(232, 69, 26, 0.5)",
+        glow: "0 0 60px -12px rgba(200, 40, 48, 0.45)",
+        "glow-strong": "0 0 90px -10px rgba(200, 40, 48, 0.6)",
+        ember: "0 0 60px -12px rgba(239, 132, 26, 0.5)",
+        brand: "0 4px 0 rgba(0, 0, 0, 0.35)",
       },
       keyframes: {
         marquee: {

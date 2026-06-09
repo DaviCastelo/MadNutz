@@ -8,6 +8,33 @@ type MarqueeProps = {
   reverse?: boolean;
 };
 
+function MarqueeItems({
+  items,
+  itemClassName,
+}: {
+  items: string[];
+  itemClassName?: string;
+}) {
+  return (
+    <>
+      {items.map((item) => (
+        <span
+          key={item}
+          className={cn(
+            "mx-6 inline-flex shrink-0 items-center gap-6 font-display text-lg font-extrabold uppercase tracking-tight sm:mx-7 sm:gap-7 sm:text-xl",
+            itemClassName,
+          )}
+        >
+          {item}
+          <span className="text-white/70" aria-hidden>
+            •
+          </span>
+        </span>
+      ))}
+    </>
+  );
+}
+
 /** Seamless infinite ticker. Content is doubled so the -50% translate loops
  *  cleanly. Decorative — hidden from assistive tech. */
 export function Marquee({
@@ -17,31 +44,20 @@ export function Marquee({
   speed = "normal",
   reverse = false,
 }: MarqueeProps) {
-  const loop = [...items, ...items];
   return (
     <div
       aria-hidden
-      className={cn("relative flex overflow-hidden mask-fade-x", className)}
+      className={cn("relative overflow-hidden mask-fade-x", className)}
     >
       <div
         className={cn(
-          "flex shrink-0 items-center whitespace-nowrap",
-          speed === "fast" ? "animate-marquee-fast" : "animate-marquee",
+          "marquee-track flex w-max flex-nowrap items-center",
+          speed === "fast" ? "marquee-track-fast" : "marquee-track-slow",
+          reverse && "marquee-track-reverse",
         )}
-        style={reverse ? { animationDirection: "reverse" } : undefined}
       >
-        {loop.map((item, i) => (
-          <span
-            key={i}
-            className={cn(
-              "mx-7 inline-flex items-center gap-7 font-display text-xl font-extrabold uppercase tracking-tight",
-              itemClassName,
-            )}
-          >
-            {item}
-            <span className="text-accent-primary">✦</span>
-          </span>
-        ))}
+        <MarqueeItems items={items} itemClassName={itemClassName} />
+        <MarqueeItems items={items} itemClassName={itemClassName} />
       </div>
     </div>
   );

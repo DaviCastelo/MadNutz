@@ -23,8 +23,8 @@ export const products: Product[] = [
     badge: "Mais Vendido",
     description:
       "Crocância explosiva com toque cítrico que vicia na primeira mordida.",
-    color: "#F5A623",
-    color2: "#C9D400",
+    color: "#C82830",
+    color2: "#EF841A",
     intensity: 4,
   },
   {
@@ -36,8 +36,8 @@ export const products: Product[] = [
     badge: "Novo",
     description:
       "O equilíbrio impossível entre o fogo da pimenta e a doçura do mel.",
-    color: "#E8451A",
-    color2: "#F5A623",
+    color: "#C82830",
+    color2: "#EF841A",
     intensity: 5,
   },
   {

@@ -20,6 +20,7 @@ export function Products() {
   return (
     <Section
       id="produtos"
+      className="relative z-20 bg-background"
       eyebrow="O cardápio"
       title={
         <>
@@ -30,7 +31,7 @@ export function Products() {
       }
       description="Quatro sabores, zero meio-termo. Cada embalagem é uma decisão difícil."
     >
-      <div className="mb-10 flex flex-wrap gap-2">
+      <div className="mb-10 flex flex-wrap justify-center gap-2 md:justify-start">
         {categories.map((c) => (
           <button
             key={c}
@@ -39,7 +40,7 @@ export function Products() {
             className={cn(
               "cursor-pointer rounded-full border px-4 py-2 font-mono text-xs font-bold uppercase tracking-[0.15em] transition-colors duration-200",
               active === c
-                ? "border-accent-primary bg-accent-primary text-background"
+                ? "border-accent-primary bg-accent-primary text-white"
                 : "border-edge text-ink-muted hover:text-ink",
             )}
           >
@@ -48,12 +49,16 @@ export function Products() {
         ))}
       </div>
 
-      <motion.div layout className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
+      <motion.div
+        layout
+        className="grid grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-5 lg:grid-cols-4"
+      >
         <AnimatePresence mode="popLayout">
           {filtered.map((p) => (
             <motion.div
               layout
               key={p.id}
+              className="mx-auto w-full max-w-sm sm:max-w-none"
               initial={mounted ? { opacity: 0, scale: 0.94 } : false}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.94 }}

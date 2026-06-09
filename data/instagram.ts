@@ -1,60 +1,53 @@
-export type InstaPost = {
-  id: number;
-  caption: string;
-  likes: number;
-  comments: number;
-  /** Gradient stops for the generated post tile. */
-  gradient: [string, string];
-  label: string;
-};
+import type { InstagramPost } from "@/lib/instagram";
 
-export const instaPosts: InstaPost[] = [
+/** Fallback estático caso a API pública do Instagram falhe no build/runtime. */
+export const fallbackInstaPosts: InstagramPost[] = [
   {
-    id: 1,
+    id: "fallback-1",
     caption: "Só mais uma, tá? 🔥 #madnutz",
     likes: 1284,
     comments: 96,
-    gradient: ["#F5A623", "#E8451A"],
-    label: "SÓ MAIS UMA",
+    imageUrl: "",
+    permalink: "https://www.instagram.com/madnutzbr/",
   },
   {
-    id: 2,
+    id: "fallback-2",
     caption: "Super Lemon chegando pra explodir seu paladar.",
     likes: 982,
     comments: 54,
-    gradient: ["#C9D400", "#F5A623"],
-    label: "SUPER LEMON",
+    imageUrl: "",
+    permalink: "https://www.instagram.com/madnutzbr/",
   },
   {
-    id: 3,
+    id: "fallback-3",
     caption: "Pimenta + mel = o crime perfeito. Spicy Mix.",
     likes: 1567,
     comments: 142,
-    gradient: ["#E8451A", "#7A1F0C"],
-    label: "SPICY MIX",
+    imageUrl: "",
+    permalink: "https://www.instagram.com/madnutzbr/",
   },
   {
-    id: 4,
+    id: "fallback-4",
     caption: "Monta o teu kit e divide (ou não).",
     likes: 743,
     comments: 38,
-    gradient: ["#1A1A1A", "#F5A623"],
-    label: "MONTA O KIT",
+    imageUrl: "",
+    permalink: "https://www.instagram.com/madnutzbr/",
   },
   {
-    id: 5,
+    id: "fallback-5",
     caption: "Cacau 70% que parece sobremesa. Dark Cocoa.",
     likes: 1102,
     comments: 71,
-    gradient: ["#8B5A2B", "#3A2417"],
-    label: "DARK COCOA",
+    imageUrl: "",
+    permalink: "https://www.instagram.com/madnutzbr/",
   },
   {
-    id: 6,
+    id: "fallback-6",
     caption: "99% nuts, 1% malícia. Sempre.",
     likes: 2034,
     comments: 188,
-    gradient: ["#F5A623", "#1A1A1A"],
-    label: "99% NUTS",
+    imageUrl: "",
+    permalink: "https://www.instagram.com/madnutzbr/",
   },
 ];

@@ -11,7 +11,7 @@ import { reviews } from "@/data/reviews";
 
 function Stat({ value, label }: { value: ReactNode; label: string }) {
   return (
-    <div className="rounded-2xl border border-edge bg-surface p-5 text-center">
+    <div className="rounded-2xl border border-edge bg-surface p-5 text-center transition-colors hover:border-accent-primary/50">
       <div className="font-display text-3xl font-extrabold text-accent-primary sm:text-5xl">
         {value}
       </div>

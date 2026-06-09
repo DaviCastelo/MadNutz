@@ -16,15 +16,16 @@ function Stat({ value, label }: { value: React.ReactNode; label: string }) {
 export function About() {
   return (
     <section id="sobre" className="relative overflow-hidden px-5 py-24 sm:px-8 md:py-32">
-      <div className="pointer-events-none absolute -left-40 top-1/3 h-96 w-96 rounded-full bg-accent-secondary/10 blur-3xl" />
+      <div className="pointer-events-none absolute -left-40 top-1/3 h-96 w-96 rounded-full bg-accent-primary/20 blur-3xl" />
+      <div className="pointer-events-none absolute -right-32 bottom-0 h-72 w-72 rounded-full bg-accent-orange/15 blur-3xl" />
       <div className="mx-auto grid w-full max-w-shell items-center gap-10 lg:grid-cols-2 lg:gap-16">
         <Reveal y={40} className="order-2 lg:order-1">
           <MascoteAbout />
         </Reveal>
 
-        <div className="order-1 lg:order-2">
+        <div className="order-1 text-center lg:order-2 lg:text-left">
           <Reveal>
-            <span className="font-mono text-xs font-bold uppercase tracking-[0.3em] text-accent-primary">
+            <span className="font-mono text-xs font-bold uppercase tracking-[0.3em] text-accent-orange">
               Sobre a MadNutz
             </span>
             <h2 className="mt-4 font-display text-4xl font-extrabold uppercase leading-[0.9] tracking-tightest text-ink sm:text-5xl md:text-6xl">
@@ -47,7 +48,7 @@ export function About() {
             </p>
           </Reveal>
 
-          <Reveal delay={0.2} className="mt-10 grid grid-cols-3 gap-6 border-t border-edge pt-8">
+          <Reveal delay={0.2} className="mt-10 grid grid-cols-3 gap-4 border-t border-edge pt-8 sm:gap-6">
             <Stat value="2022" label="quando começou" />
             <Stat value={<CountUp to={4} />} label="sabores no catálogo" />
             <Stat value={<CountUp to={100} suffix="%" />} label="castanha premium" />

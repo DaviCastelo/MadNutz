@@ -17,7 +17,7 @@ export const reviews: Review[] = [
     location: "Fortaleza, CE",
     rating: 5,
     text: "Comprei pra ver e acabei viciada. O Super Lemon é absurdo, não consigo parar. 'Só mais uma' virou o pacote inteiro.",
-    avatar: ["#F5A623", "#E8451A"],
+    avatar: ["#C82830", "#EF841A"],
   },
   {
     id: 2,
@@ -35,7 +35,7 @@ export const reviews: Review[] = [
     location: "Belo Horizonte, MG",
     rating: 5,
     text: "Montei um kit de 12 pra dividir com a equipe e sumiu em um dia. A embalagem é linda e o sabor entrega tudo.",
-    avatar: ["#C9D400", "#F5A623"],
+    avatar: ["#EF841A", "#C82830"],
   },
   {
     id: 4,
@@ -62,6 +62,6 @@ export const reviews: Review[] = [
     location: "Salvador, BA",
     rating: 5,
     text: "Marca com personalidade e produto à altura. Virei embaixador não-oficial, já indiquei pra meio escritório.",
-    avatar: ["#F5A623", "#C9D400"],
+    avatar: ["#C82830", "#EF841A"],
   },
 ];

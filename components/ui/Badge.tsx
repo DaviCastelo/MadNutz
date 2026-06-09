@@ -7,9 +7,9 @@ type BadgeProps = {
 };
 
 const styles: Record<NonNullable<BadgeProps["variant"]>, string> = {
-  amber: "bg-accent-primary text-background",
-  ember: "bg-accent-secondary text-ink",
-  ghost: "border border-edge bg-background/60 text-ink-muted backdrop-blur",
+  amber: "bg-accent-primary text-white",
+  ember: "bg-accent-orange text-black",
+  ghost: "border border-accent-orange/40 bg-background/60 text-accent-orange backdrop-blur",
 };
 
 export function Badge({ children, variant = "amber", className }: BadgeProps) {

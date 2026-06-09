@@ -27,15 +27,13 @@ export function Navbar() {
 
   return (
     <>
-      <header className="fixed inset-x-0 top-0 z-50 px-4 pt-4 sm:px-6">
-        <div
-          className={cn(
-            "mx-auto flex max-w-shell items-center justify-between gap-4 rounded-2xl border px-4 py-2.5 transition-all duration-300 sm:px-5",
-            scrolled
-              ? "border-edge bg-background/70 shadow-2xl shadow-black/40 backdrop-blur-xl"
-              : "border-transparent bg-transparent",
-          )}
-        >
+      <header
+        className={cn(
+          "fixed inset-x-0 top-0 z-50 bg-accent-primary shadow-brand transition-shadow duration-300",
+          scrolled && "shadow-lg shadow-black/40",
+        )}
+      >
+        <div className="mx-auto flex max-w-shell items-center justify-between gap-4 px-4 py-3 sm:px-6">
           <NavLogo />
 
           <nav className="hidden items-center gap-1 md:flex">
@@ -43,7 +41,7 @@ export function Navbar() {
               <a
                 key={link.href}
                 href={link.href}
-                className="rounded-lg px-4 py-2 font-mono text-xs font-bold uppercase tracking-[0.15em] text-ink-muted transition-colors hover:text-ink"
+                className="rounded-lg px-4 py-2 font-mono text-xs font-bold uppercase tracking-[0.15em] text-white/80 transition-colors hover:text-white"
               >
                 {link.label}
               </a>
@@ -56,7 +54,7 @@ export function Navbar() {
               type="button"
               onClick={() => setMenuOpen(true)}
               aria-label="Abrir menu"
-              className="grid h-11 w-11 cursor-pointer place-items-center rounded-xl border border-edge bg-surface/60 text-ink backdrop-blur transition-colors hover:border-accent-primary hover:text-accent-primary md:hidden"
+              className="grid h-11 w-11 cursor-pointer place-items-center rounded-xl border border-white/20 bg-white/10 text-white transition-colors hover:border-white hover:bg-white/15 md:hidden"
             >
               <Menu className="h-5 w-5" />
             </button>
