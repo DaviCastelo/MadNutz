@@ -12,6 +12,9 @@ import { CartDrawer } from "@/components/cart/CartDrawer";
 import { CursorGlow } from "@/components/CursorGlow";
 import { LoadingScreen } from "@/components/LoadingScreen";
 
+/** Revalida a home a cada 1h para atualizar posts do Instagram (fetch falha no build da Vercel). */
+export const revalidate = 3600;
+
 export default function Home() {
   return (
     <>

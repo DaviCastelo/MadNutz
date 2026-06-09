@@ -11,11 +11,11 @@ import { reviews } from "@/data/reviews";
 
 function Stat({ value, label }: { value: ReactNode; label: string }) {
   return (
-    <div className="rounded-2xl border border-edge bg-surface p-5 text-center transition-colors hover:border-accent-primary/50">
-      <div className="font-display text-3xl font-extrabold text-accent-primary sm:text-5xl">
+    <div className="min-w-0 overflow-hidden rounded-xl border border-edge bg-surface p-2.5 text-center transition-colors hover:border-accent-primary/50 sm:rounded-2xl sm:p-5">
+      <div className="font-display text-[clamp(1.1rem,5vw,3rem)] font-extrabold leading-none tabular-nums text-accent-primary">
         {value}
       </div>
-      <div className="mt-1 font-mono text-[11px] uppercase tracking-[0.15em] text-ink-muted">
+      <div className="mt-1 font-mono text-[9px] uppercase leading-tight tracking-[0.06em] text-ink-muted sm:text-[11px] sm:tracking-[0.15em]">
         {label}
       </div>
     </div>
@@ -33,8 +33,18 @@ export function Reviews() {
       eyebrow="Prova social"
       title={<>Quem provou,<br /><span className="text-accent-primary">não larga.</span></>}
     >
-      <Reveal className="mb-12 grid grid-cols-3 gap-3 sm:gap-4">
-        <Stat value={<CountUp to={2000} suffix="+" />} label="kits entregues" />
+      <Reveal className="mb-12 grid min-w-0 grid-cols-3 gap-1.5 sm:gap-4">
+        <Stat
+          value={
+            <>
+              <span className="sm:hidden">2k+</span>
+              <span className="hidden sm:inline">
+                <CountUp to={2000} suffix="+" />
+              </span>
+            </>
+          }
+          label="kits entregues"
+        />
         <Stat value="4,9" label="nota média" />
         <Stat value={<CountUp to={98} suffix="%" />} label="voltam pra mais" />
       </Reveal>

@@ -28,6 +28,17 @@ type IgMediaNode = {
   edge_sidecar_to_children?: { edges?: { node?: { display_url?: string } }[] };
 };
 
+type GraphMediaItem = {
+  id?: string;
+  caption?: string;
+  media_type?: string;
+  media_url?: string;
+  thumbnail_url?: string;
+  permalink?: string;
+  like_count?: number;
+  comments_count?: number;
+};
+
 function imageFromNode(node: IgMediaNode): string {
   if (node.__typename === "GraphSidecar") {
     const first = node.edge_sidecar_to_children?.edges?.[0]?.node?.display_url;
@@ -60,49 +71,112 @@ function mapNode(node: IgMediaNode): InstagramPost | null {
   };
 }
 
+/** Usa proxy interno para servir imagens do CDN do Instagram na Vercel. */
+export function instagramImageSrc(cdnUrl: string): string {
+  if (!cdnUrl) return "";
+  return `/api/ig-image?url=${encodeURIComponent(cdnUrl)}`;
+}
+
+async function getInstagramPostsFromGraph(
+  limit: number,
+): Promise<InstagramPost[]> {
+  const token = process.env.INSTAGRAM_ACCESS_TOKEN;
+  if (!token) return [];
+
+  try {
+    const res = await fetch(
+      `https://graph.instagram.com/me/media?fields=id,caption,media_type,media_url,thumbnail_url,permalink,like_count,comments_count&limit=${limit}&access_token=${token}`,
+      { next: { revalidate: 3600 } },
+    );
+
+    if (!res.ok) {
+      console.warn(`[instagram] Graph API HTTP ${res.status}`);
+      return [];
+    }
+
+    const json = (await res.json()) as { data?: GraphMediaItem[] };
+    const posts = (json.data ?? [])
+      .map((item): InstagramPost | null => {
+        const imageUrl =
+          item.media_type === "VIDEO"
+            ? (item.thumbnail_url ?? item.media_url ?? "")
+            : (item.media_url ?? item.thumbnail_url ?? "");
+        if (!imageUrl || !item.permalink) return null;
+
+        return {
+          id: item.id ?? item.permalink,
+          caption: item.caption?.trim() ?? "",
+          likes: item.like_count ?? 0,
+          comments: item.comments_count ?? 0,
+          imageUrl,
+          permalink: item.permalink,
+          isVideo: item.media_type === "VIDEO",
+        };
+      })
+      .filter((post): post is InstagramPost => post !== null);
+
+    return posts;
+  } catch (error) {
+    console.warn("[instagram] Graph API falhou:", error);
+    return [];
+  }
+}
+
+async function getInstagramPostsFromScrape(
+  username: string,
+  limit: number,
+): Promise<InstagramPost[]> {
+  const res = await fetch(
+    `https://www.instagram.com/api/v1/users/web_profile_info/?username=${encodeURIComponent(username)}`,
+    {
+      headers: {
+        "User-Agent": IG_USER_AGENT,
+        "X-IG-App-ID": IG_APP_ID,
+        Accept: "*/*",
+        "Accept-Language": "pt-BR,pt;q=0.9",
+        Referer: `https://www.instagram.com/${username}/`,
+        Origin: "https://www.instagram.com",
+        "Sec-Fetch-Dest": "empty",
+        "Sec-Fetch-Mode": "cors",
+        "Sec-Fetch-Site": "same-origin",
+      },
+      next: { revalidate: 3600 },
+    },
+  );
+
+  if (!res.ok) {
+    throw new Error(`Instagram HTTP ${res.status}`);
+  }
+
+  const json = (await res.json()) as {
+    data?: {
+      user?: {
+        edge_owner_to_timeline_media?: { edges?: { node?: IgMediaNode }[] };
+      };
+    };
+  };
+
+  const edges = json.data?.user?.edge_owner_to_timeline_media?.edges ?? [];
+  return edges
+    .map((edge) => (edge.node ? mapNode(edge.node) : null))
+    .filter((post): post is InstagramPost => post !== null)
+    .slice(0, limit);
+}
+
 /** Busca os posts públicos mais recentes do perfil (cache de 1h). */
 export async function getInstagramPosts(
   username = process.env.INSTAGRAM_USERNAME ?? "madnutzbr",
   limit = 6,
 ): Promise<InstagramPost[]> {
+  const graphPosts = await getInstagramPostsFromGraph(limit);
+  if (graphPosts.length > 0) return graphPosts;
+
   try {
-    const res = await fetch(
-      `https://www.instagram.com/api/v1/users/web_profile_info/?username=${encodeURIComponent(username)}`,
-      {
-        headers: {
-          "User-Agent": IG_USER_AGENT,
-          "X-IG-App-ID": IG_APP_ID,
-          Accept: "*/*",
-          "Accept-Language": "pt-BR,pt;q=0.9",
-          Referer: `https://www.instagram.com/${username}/`,
-          Origin: "https://www.instagram.com",
-          "Sec-Fetch-Dest": "empty",
-          "Sec-Fetch-Mode": "cors",
-          "Sec-Fetch-Site": "same-origin",
-        },
-        next: { revalidate: 3600 },
-      },
-    );
-
-    if (!res.ok) throw new Error(`Instagram HTTP ${res.status}`);
-
-    const json = (await res.json()) as {
-      data?: {
-        user?: {
-          edge_owner_to_timeline_media?: { edges?: { node?: IgMediaNode }[] };
-        };
-      };
-    };
-
-    const edges = json.data?.user?.edge_owner_to_timeline_media?.edges ?? [];
-    const posts = edges
-      .map((edge) => (edge.node ? mapNode(edge.node) : null))
-      .filter((post): post is InstagramPost => post !== null)
-      .slice(0, limit);
-
+    const posts = await getInstagramPostsFromScrape(username, limit);
     if (posts.length > 0) return posts;
-  } catch {
-    // cai no fallback abaixo
+    console.warn("[instagram] Scrape retornou 0 posts");
+  } catch (error) {
+    console.warn("[instagram] Scrape falhou:", error);
   }
 
   return fallbackInstaPosts;

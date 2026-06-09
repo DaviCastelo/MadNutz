@@ -5,8 +5,6 @@ import { InstagramGrid } from "./InstagramGrid";
 import { getInstagramPosts } from "@/lib/instagram";
 import { SOCIAL } from "@/lib/utils";
 
-export const revalidate = 3600;
-
 export async function Instagram() {
   const posts = await getInstagramPosts();
 

@@ -1,13 +1,40 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import { Heart, MessageCircle, Play } from "lucide-react";
 import { Reveal } from "@/components/ui/Reveal";
-import type { InstagramPost } from "@/lib/instagram";
+import { instagramImageSrc, type InstagramPost } from "@/lib/instagram";
 
 const LABELS = ["SÓ MAIS UMA", "SUPER LEMON", "SPICY MIX", "MONTA O KIT", "DARK COCOA", "99% NUTS"];
 
-export function InstagramGrid({ posts }: { posts: InstagramPost[] }) {
+function hasRealImages(posts: InstagramPost[]) {
+  return posts.some((post) => Boolean(post.imageUrl));
+}
+
+export function InstagramGrid({ posts: initialPosts }: { posts: InstagramPost[] }) {
+  const [posts, setPosts] = useState(initialPosts);
+
+  useEffect(() => {
+    if (hasRealImages(initialPosts)) return;
+
+    let cancelled = false;
+
+    fetch("/api/instagram")
+      .then((res) => (res.ok ? res.json() : null))
+      .then((data: { posts?: InstagramPost[] } | null) => {
+        if (cancelled || !data?.posts?.length) return;
+        if (hasRealImages(data.posts)) setPosts(data.posts);
+      })
+      .catch(() => {
+        // mantém fallback visual
+      });
+
+    return () => {
+      cancelled = true;
+    };
+  }, [initialPosts]);
+
   return (
     <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
       {posts.map((post, i) => {
@@ -25,9 +52,10 @@ export function InstagramGrid({ posts }: { posts: InstagramPost[] }) {
             >
               {hasImage ? (
                 <Image
-                  src={post.imageUrl}
+                  src={instagramImageSrc(post.imageUrl)}
                   alt={post.caption || "Post MadNutz no Instagram"}
                   fill
+                  unoptimized
                   sizes="(max-width: 640px) 50vw, 320px"
                   className="object-cover transition-transform duration-500 group-hover:scale-105"
                 />
