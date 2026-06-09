@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 360" fill="none" role="img" aria-label="Mascote MadNutz">
+  <defs>
+    <linearGradient id="body" x1="80" y1="40" x2="240" y2="320" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F8B946"/>
+      <stop offset="0.55" stop-color="#F5A623"/>
+      <stop offset="1" stop-color="#E8451A"/>
+    </linearGradient>
+    <filter id="glow" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="18" result="b"/>
+      <feColorMatrix in="b" type="matrix" values="0 0 0 0 0.96  0 0 0 0 0.65  0 0 0 0 0.14  0 0 0 0.55 0"/>
+      <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <g filter="url(#glow)">
+    <!-- nut body -->
+    <path d="M160 38 C232 38 282 94 282 176 C282 258 232 322 160 322 C88 322 38 258 38 176 C38 94 88 38 160 38 Z" fill="url(#body)"/>
+    <!-- seam -->
+    <path d="M160 58 C142 130 142 232 160 302" stroke="#C2400F" stroke-width="3" stroke-opacity="0.35" stroke-linecap="round"/>
+    <!-- top-left gloss -->
+    <ellipse cx="116" cy="104" rx="34" ry="22" fill="#FFFFFF" opacity="0.22" transform="rotate(-24 116 104)"/>
+
+    <!-- eyebrows: right one cocked for malicia -->
+    <path d="M82 132 L142 124" stroke="#1A1208" stroke-width="11" stroke-linecap="round"/>
+    <path d="M178 120 L240 138" stroke="#1A1208" stroke-width="11" stroke-linecap="round"/>
+
+    <!-- sunglasses -->
+    <path d="M70 150 H250" stroke="#1A1208" stroke-width="9" stroke-linecap="round"/>
+    <rect x="74" y="150" width="74" height="50" rx="16" fill="#15100A"/>
+    <rect x="172" y="150" width="74" height="50" rx="16" fill="#15100A"/>
+    <path d="M148 162 H172" stroke="#15100A" stroke-width="10" stroke-linecap="round"/>
+    <!-- lens glare -->
+    <path d="M88 164 L108 164 L92 192 L80 192 Z" fill="#F5A623" opacity="0.5"/>
+    <path d="M186 164 L206 164 L190 192 L178 192 Z" fill="#F5A623" opacity="0.5"/>
+
+    <!-- smirk -->
+    <path d="M116 236 Q160 272 214 230" stroke="#1A1208" stroke-width="11" stroke-linecap="round" fill="none"/>
+  </g>
+</svg>
