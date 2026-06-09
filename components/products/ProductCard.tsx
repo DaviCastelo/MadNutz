@@ -61,7 +61,7 @@ export function ProductCard({ product }: { product: Product }) {
       onMouseMove={onMove}
       onMouseLeave={() => setTilt({ rx: 0, ry: 0 })}
       style={tiltStyle}
-      className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-edge bg-surface p-5 transition-[transform,border-color,box-shadow] duration-200 sm:p-6 [transform-style:preserve-3d] hover:border-accent-primary/50 hover:shadow-glow"
+      className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-edge bg-surface px-5 py-5 pb-6 transition-[transform,border-color,box-shadow] duration-200 sm:px-6 sm:py-6 sm:pb-7 [transform-style:preserve-3d] hover:border-accent-primary/50 hover:shadow-glow"
     >
       {product.badge && (
         <Badge
@@ -90,8 +90,8 @@ export function ProductCard({ product }: { product: Product }) {
         <p className="mt-3 text-sm leading-relaxed text-ink-muted">{product.description}</p>
         <IntensityMeter value={product.intensity} />
 
-        <div className="mt-5 border-t border-edge/80 pt-5">
-          <div className="flex flex-col items-stretch gap-3 sm:flex-row sm:items-center sm:justify-between">
+        <div className="mt-auto border-t border-edge/80 pt-5">
+          <div className="flex flex-col gap-3">
             <span className="text-center font-display text-xl font-extrabold text-ink sm:text-left sm:text-2xl">
               {brl(product.price)}
             </span>
@@ -99,7 +99,7 @@ export function ProductCard({ product }: { product: Product }) {
               size="sm"
               onClick={onAdd}
               aria-label={`Adicionar ${product.name} ao carrinho`}
-              className="w-full shrink-0 sm:w-auto"
+              className="w-full"
             >
               {added ? <Check className="h-4 w-4" /> : <Plus className="h-4 w-4" />}
               {added ? "Na sacola" : "Adicionar"}
