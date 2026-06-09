@@ -3,7 +3,7 @@
 import { useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { X } from "lucide-react";
-import { LogoWordmark } from "@/components/brand/LogoWordmark";
+import { HeaderLogo } from "@/components/brand/HeaderLogo";
 import { waLink } from "@/lib/utils";
 
 type NavLink = { label: string; href: string };
@@ -35,7 +35,7 @@ export function MobileMenu({
           className="fixed inset-0 z-[55] flex min-h-[100dvh] flex-col overflow-x-clip bg-accent-primary px-5 pb-8 pt-5 sm:px-6 md:hidden"
         >
           <div className="flex shrink-0 items-center justify-between gap-4">
-            <LogoWordmark variant="header" className="text-lg sm:text-xl" />
+            <HeaderLogo />
             <button
               type="button"
               onClick={onClose}
